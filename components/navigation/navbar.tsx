@@ -90,7 +90,7 @@ const SERVICES = [
 ]
 
 export function Navbar() {
-  const [isScrolled, setIsScrolled] = React.useState(false)
+  const [isOverHero, setIsOverHero] = React.useState(true)
   const [isServicesOpen, setIsServicesOpen] = React.useState(false)
   const [isSearchOpen, setIsSearchOpen] = React.useState(false)
   const [isContactOpen, setIsContactOpen] = React.useState(false)
@@ -101,15 +101,32 @@ export function Navbar() {
 
   const dropdownTimerRef = React.useRef<NodeJS.Timeout | null>(null)
   const searchInputRef = React.useRef<HTMLInputElement | null>(null)
+  const headerRef = React.useRef<HTMLElement | null>(null)
 
-  // Track scroll position for subtle shadow enhancement
+  // Track whether the video scroll hero section is active under the navbar
   React.useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
+      const heroEl = document.getElementById("video-hero-section")
+      if (!heroEl) {
+        setIsOverHero(false)
+        return
+      }
+      const rect = heroEl.getBoundingClientRect()
+      const navHeight = headerRef.current?.offsetHeight || 84
+      // The video scroll hero is active while its bottom is still below the navbar
+      setIsOverHero(rect.bottom > navHeight)
     }
+
+    handleScroll()
     window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
+    window.addEventListener("resize", handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      window.removeEventListener("resize", handleScroll)
+    }
   }, [])
+
+  const isTransparent = isOverHero && !isMobileMenuOpen
 
   // Focus search input when search modal opens
   React.useEffect(() => {
@@ -165,16 +182,21 @@ export function Navbar() {
 
   return (
     <>
-      {/* Top accent bar line - matches screenshot's dark upper strip */}
-      <div className="h-[3px] w-full bg-[#282d37]" />
-
       <header
-        className={`sticky top-0 z-40 w-full bg-white transition-shadow duration-200 border-b ${
-          isScrolled
-            ? "border-slate-200/80 shadow-sm"
-            : "border-slate-100"
+        ref={headerRef}
+        className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
+          isTransparent
+            ? "bg-gradient-to-b from-black/60 via-black/25 to-transparent border-b border-transparent shadow-none"
+            : "bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm"
         }`}
       >
+        {/* Top accent bar line - matches screenshot's dark upper strip, visible when solid */}
+        <div
+          className={`h-[3px] w-full transition-all duration-300 ${
+            isTransparent ? "opacity-0 bg-transparent" : "opacity-100 bg-[#282d37]"
+          }`}
+        />
+
         <div className="max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20 md:h-[84px]">
             {/* Left: ALFA Logo */}
@@ -190,7 +212,11 @@ export function Navbar() {
                     alt="Alfa Gulf Technologies & Construction Company"
                     fill
                     sizes="(max-width: 640px) 140px, 180px"
-                    className="object-contain"
+                    className={`object-contain transition-all duration-300 ${
+                      isTransparent
+                        ? "brightness-0 invert drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
+                        : ""
+                    }`}
                     priority
                   />
                 </div>
@@ -203,18 +229,34 @@ export function Navbar() {
               <nav className="flex items-center space-x-7 xl:space-x-9" aria-label="Main Navigation">
                 <Link
                   href="/"
-                  className="text-[13px] font-bold tracking-[0.08em] uppercase text-slate-800 hover:text-[#0081c6] transition-colors py-2 relative group"
+                  className={`text-[13px] font-bold tracking-[0.08em] uppercase transition-colors py-2 relative group ${
+                    isTransparent
+                      ? "text-white/90 hover:text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+                      : "text-slate-800 hover:text-[#0081c6]"
+                  }`}
                 >
                   HOME
-                  <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#0081c6] transition-all duration-200 group-hover:w-full" />
+                  <span
+                    className={`absolute bottom-0 left-0 w-0 h-[2px] transition-all duration-200 group-hover:w-full ${
+                      isTransparent ? "bg-white" : "bg-[#0081c6]"
+                    }`}
+                  />
                 </Link>
 
                 <Link
                   href="/about-us"
-                  className="text-[13px] font-bold tracking-[0.08em] uppercase text-slate-800 hover:text-[#0081c6] transition-colors py-2 relative group"
+                  className={`text-[13px] font-bold tracking-[0.08em] uppercase transition-colors py-2 relative group ${
+                    isTransparent
+                      ? "text-white/90 hover:text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+                      : "text-slate-800 hover:text-[#0081c6]"
+                  }`}
                 >
                   ABOUT US
-                  <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#0081c6] transition-all duration-200 group-hover:w-full" />
+                  <span
+                    className={`absolute bottom-0 left-0 w-0 h-[2px] transition-all duration-200 group-hover:w-full ${
+                      isTransparent ? "bg-white" : "bg-[#0081c6]"
+                    }`}
+                  />
                 </Link>
 
                 {/* SERVICES Dropdown */}
@@ -227,18 +269,26 @@ export function Navbar() {
                     type="button"
                     onClick={() => setIsServicesOpen(!isServicesOpen)}
                     aria-expanded={isServicesOpen}
-                    className="flex items-center gap-1 text-[13px] font-bold tracking-[0.08em] uppercase text-slate-800 hover:text-[#0081c6] transition-colors py-2 relative group focus:outline-none"
+                    className={`flex items-center gap-1 text-[13px] font-bold tracking-[0.08em] uppercase transition-colors py-2 relative group focus:outline-none ${
+                      isTransparent
+                        ? "text-white/90 hover:text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+                        : "text-slate-800 hover:text-[#0081c6]"
+                    }`}
                   >
                     SERVICES
                     <ChevronDown
-                      className={`w-3.5 h-3.5 transition-transform duration-200 text-slate-500 group-hover:text-[#0081c6] ${
+                      className={`w-3.5 h-3.5 transition-transform duration-200 ${
                         isServicesOpen ? "rotate-180" : ""
+                      } ${
+                        isTransparent
+                          ? "text-white/80 group-hover:text-white"
+                          : "text-slate-500 group-hover:text-[#0081c6]"
                       }`}
                     />
                     <span
-                      className={`absolute bottom-0 left-0 h-[2px] bg-[#0081c6] transition-all duration-200 ${
-                        isServicesOpen ? "w-full" : "w-0 group-hover:w-full"
-                      }`}
+                      className={`absolute bottom-0 left-0 h-[2px] transition-all duration-200 ${
+                        isTransparent ? "bg-white" : "bg-[#0081c6]"
+                      } ${isServicesOpen ? "w-full" : "w-0 group-hover:w-full"}`}
                     />
                   </button>
 
@@ -288,10 +338,18 @@ export function Navbar() {
 
                 <Link
                   href="/news"
-                  className="text-[13px] font-bold tracking-[0.08em] uppercase text-slate-800 hover:text-[#0081c6] transition-colors py-2 relative group"
+                  className={`text-[13px] font-bold tracking-[0.08em] uppercase transition-colors py-2 relative group ${
+                    isTransparent
+                      ? "text-white/90 hover:text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+                      : "text-slate-800 hover:text-[#0081c6]"
+                  }`}
                 >
                   NEWS
-                  <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#0081c6] transition-all duration-200 group-hover:w-full" />
+                  <span
+                    className={`absolute bottom-0 left-0 w-0 h-[2px] transition-all duration-200 group-hover:w-full ${
+                      isTransparent ? "bg-white" : "bg-[#0081c6]"
+                    }`}
+                  />
                 </Link>
               </nav>
 
@@ -301,7 +359,11 @@ export function Navbar() {
                 <button
                   type="button"
                   onClick={() => setIsSearchOpen(true)}
-                  className="p-2 text-slate-800 hover:text-[#0081c6] transition-colors focus:outline-none rounded-md"
+                  className={`p-2 transition-colors focus:outline-none rounded-md ${
+                    isTransparent
+                      ? "text-white/90 hover:text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+                      : "text-slate-800 hover:text-[#0081c6]"
+                  }`}
                   aria-label="Open Search"
                 >
                   <Search className="w-[17px] h-[17px] stroke-[2]" />
@@ -309,7 +371,9 @@ export function Navbar() {
 
                 {/* Vertical Divider */}
                 <div
-                  className="h-4 w-[1px] bg-slate-300 mx-3.5"
+                  className={`h-4 w-[1px] mx-3.5 transition-colors ${
+                    isTransparent ? "bg-white/30" : "bg-slate-300"
+                  }`}
                   aria-hidden="true"
                 />
 
@@ -317,11 +381,19 @@ export function Navbar() {
                 <button
                   type="button"
                   onClick={() => setIsContactOpen(true)}
-                  className="group flex items-center gap-2 text-[13px] font-bold tracking-[0.08em] uppercase text-slate-900 hover:text-[#0081c6] transition-colors py-1.5 focus:outline-none"
+                  className={`group flex items-center gap-2 text-[13px] font-bold tracking-[0.08em] uppercase transition-colors py-1.5 focus:outline-none ${
+                    isTransparent
+                      ? "text-white/95 hover:text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+                      : "text-slate-900 hover:text-[#0081c6]"
+                  }`}
                 >
                   {/* Custom 2x2 square dot grid icon matching the reference image */}
                   <span
-                    className="grid grid-cols-2 gap-[2.5px] w-3 h-3 text-slate-900 group-hover:text-[#0081c6] transition-colors"
+                    className={`grid grid-cols-2 gap-[2.5px] w-3 h-3 transition-colors ${
+                      isTransparent
+                        ? "text-white group-hover:text-sky-300"
+                        : "text-slate-900 group-hover:text-[#0081c6]"
+                    }`}
                     aria-hidden="true"
                   >
                     <span className="w-1 h-1 rounded-[0.5px] bg-current" />
@@ -339,7 +411,11 @@ export function Navbar() {
               <button
                 type="button"
                 onClick={() => setIsSearchOpen(true)}
-                className="p-2 text-slate-800 hover:text-[#0081c6] transition-colors focus:outline-none"
+                className={`p-2 transition-colors focus:outline-none ${
+                  isTransparent
+                    ? "text-white hover:text-sky-300"
+                    : "text-slate-800 hover:text-[#0081c6]"
+                }`}
                 aria-label="Open Search"
               >
                 <Search className="w-5 h-5" />
@@ -348,11 +424,17 @@ export function Navbar() {
               <button
                 type="button"
                 onClick={() => setIsContactOpen(true)}
-                className="p-2 text-slate-800 hover:text-[#0081c6] transition-colors focus:outline-none"
+                className={`p-2 transition-colors focus:outline-none ${
+                  isTransparent
+                    ? "text-white hover:text-sky-300"
+                    : "text-slate-800 hover:text-[#0081c6]"
+                }`}
                 aria-label="Get in Touch"
               >
                 <span
-                  className="grid grid-cols-2 gap-[2px] w-3.5 h-3.5 text-slate-900"
+                  className={`grid grid-cols-2 gap-[2px] w-3.5 h-3.5 transition-colors ${
+                    isTransparent ? "text-white" : "text-slate-900"
+                  }`}
                   aria-hidden="true"
                 >
                   <span className="w-1 h-1 rounded-[0.5px] bg-current" />
@@ -365,7 +447,11 @@ export function Navbar() {
               <button
                 type="button"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2 text-slate-900 hover:text-[#0081c6] transition-colors focus:outline-none"
+                className={`p-2 transition-colors focus:outline-none ${
+                  isTransparent
+                    ? "text-white hover:text-sky-300"
+                    : "text-slate-900 hover:text-[#0081c6]"
+                }`}
                 aria-label={isMobileMenuOpen ? "Close Menu" : "Open Menu"}
                 aria-expanded={isMobileMenuOpen}
               >

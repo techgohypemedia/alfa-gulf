@@ -1,4 +1,5 @@
 import { VideoScrollHero } from "@/components/sections/hero"
+import { CategoriesSection } from "@/components/sections/categories"
 import HeroScrollVideoReveal from "@/components/ui/hero-scroll-video-pin-reveal"
 import { BuildingForTheBest } from "@/components/sections/building-for-the-best/building-for-the-best"
 import { ServicesStackInteractor } from "@/components/ui/connoisseur-stack-interactor"
@@ -12,7 +13,10 @@ export default function Home() {
       {/* 1. 192-Frame Scroll Video Hero */}
       <VideoScrollHero />
 
-      {/* 2. Sectors & Video Pin Reveal Section with Screenshot Content */}
+      {/* 2. Core Categories: Construction, IT & Technology, Transportation */}
+      <CategoriesSection />
+
+      {/* 3. Sectors & Video Pin Reveal Section with Screenshot Content */}
       <HeroScrollVideoReveal videoSrc="/Aerial_view_of_industrial_complex_202609071617_gwr_video_mvp.mp4" />
 
       {/* 3. Services Section with GSAP SVG Interactive Clip-Path Stack */}

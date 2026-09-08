@@ -757,7 +757,7 @@ export const HeroScrollVideoReveal: React.FC<HeroScrollVideoRevealProps> = ({
             {/* TOP HUD: Project Location & Coordinates */}
             <div
               ref={topHudRef}
-              className="absolute top-8 sm:top-12 inset-x-6 sm:inset-x-12 lg:inset-x-16 z-20 flex items-center justify-between pointer-events-none opacity-0 will-change-transform"
+              className="absolute top-24 sm:top-28 inset-x-6 sm:inset-x-12 lg:inset-x-16 z-20 flex items-center justify-between pointer-events-none opacity-0 will-change-transform"
             >
               <div className="flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-black/45 backdrop-blur-md border border-white/20 text-white text-xs font-mono font-medium shadow-lg">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />

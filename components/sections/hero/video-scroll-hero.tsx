@@ -184,12 +184,12 @@ function FillableHeadline({
                 const isFilled = thisIndex < currentActiveIndex
                 const isActive = thisIndex === currentActiveIndex
 
-                // Active leading letter being filled (orange highlight)
+                // Active leading letter being filled (Alfa Gulf brand blue highlight)
                 if (isActive && fillRatio < 0.98) {
                   return (
                     <span
                       key={cIdx}
-                      className="text-[#ea580c] font-bold drop-shadow-[0_0_16px_rgba(234,88,12,0.95)] scale-110 inline-block transition-transform duration-75"
+                      className="text-[#0081c6] font-bold drop-shadow-[0_0_18px_rgba(0,129,198,0.95)] scale-110 inline-block transition-transform duration-75"
                     >
                       {char}
                     </span>
@@ -396,10 +396,11 @@ export function VideoScrollHero() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-[450vh] bg-white select-none"
+      id="video-hero-section"
+      className="relative w-full h-[450vh] bg-slate-950 select-none"
     >
       {/* Sticky Fullscreen Canvas Viewport */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-white">
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-slate-950">
         {/* Canvas rendering 1080p WebP frame sequence */}
         <canvas
           ref={canvasRef}
@@ -451,7 +452,7 @@ export function VideoScrollHero() {
         {scrollProgress < 0.05 && (
           <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/60 text-xs font-semibold tracking-widest uppercase animate-bounce pointer-events-none z-20">
             <span>Scroll To Explore</span>
-            <ChevronDown className="w-4 h-4 text-[#ea580c]" />
+            <ChevronDown className="w-4 h-4 text-[#0081c6]" />
           </div>
         )}
       </div>
