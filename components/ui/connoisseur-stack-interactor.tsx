@@ -292,7 +292,7 @@ export const ServicesStackInteractor: React.FC<ServicesStackInteractorProps> = (
               <span className="text-xs sm:text-sm font-semibold tracking-wider text-zinc-500 uppercase">
                 {subtitle}
               </span>
-              <span className="w-8 h-[2px] bg-orange-500 inline-block" />
+              <span className="w-8 h-[2px] bg-zinc-950 inline-block" />
             </div>
 
             <p className="text-base sm:text-xl xl:text-[21px] font-normal leading-relaxed sm:leading-[1.62] text-zinc-700 tracking-tight">
@@ -320,14 +320,14 @@ export const ServicesStackInteractor: React.FC<ServicesStackInteractorProps> = (
                     onClick={() => handleItemHover(idx)}
                     className={cn(
                       "group cursor-pointer flex items-start gap-3 py-2.5 px-2 rounded-lg transition-colors duration-150",
-                      isActive ? "bg-orange-50/80" : "active:bg-zinc-50"
+                      isActive ? "bg-zinc-100/90 shadow-xs" : "active:bg-zinc-50"
                     )}
                   >
                     <span
                       className={cn(
                         "text-xs font-mono tracking-wider pt-0.5 transition-colors duration-150 shrink-0",
                         isActive
-                          ? "text-orange-600 font-bold"
+                          ? "text-zinc-950 font-bold"
                           : "text-zinc-400 group-hover:text-zinc-600"
                       )}
                     >
@@ -337,8 +337,8 @@ export const ServicesStackInteractor: React.FC<ServicesStackInteractorProps> = (
                       className={cn(
                         "text-[14.5px] leading-snug font-medium transition-colors duration-150",
                         isActive
-                          ? "text-orange-600 font-semibold"
-                          : "text-zinc-700 group-hover:text-zinc-950"
+                          ? "text-zinc-950 font-semibold"
+                          : "text-zinc-600 group-hover:text-zinc-950"
                       )}
                     >
                       {item.name}
@@ -366,14 +366,14 @@ export const ServicesStackInteractor: React.FC<ServicesStackInteractorProps> = (
                         onClick={() => handleItemHover(row.leftIdx)}
                         className={cn(
                           "group cursor-pointer flex items-start gap-3.5 py-1.5 px-2.5 -mx-2.5 rounded-lg transition-colors duration-150",
-                          isLeftActive ? "bg-orange-50/80" : "hover:bg-zinc-50"
+                          isLeftActive ? "bg-zinc-100/90 shadow-xs" : "hover:bg-zinc-50"
                         )}
                       >
                         <span
                           className={cn(
                             "text-xs sm:text-sm font-mono tracking-wider pt-0.5 transition-colors duration-150 shrink-0",
                             isLeftActive
-                              ? "text-orange-600 font-bold"
+                              ? "text-zinc-950 font-bold"
                               : "text-zinc-400 group-hover:text-zinc-600"
                           )}
                         >
@@ -383,8 +383,8 @@ export const ServicesStackInteractor: React.FC<ServicesStackInteractorProps> = (
                           className={cn(
                             "text-[14.5px] sm:text-[15px] xl:text-[15.5px] leading-snug font-medium transition-colors duration-150",
                             isLeftActive
-                              ? "text-orange-600"
-                              : "text-zinc-700 group-hover:text-zinc-950"
+                              ? "text-zinc-950 font-semibold"
+                              : "text-zinc-600 group-hover:text-zinc-950"
                           )}
                         >
                           {row.left.name}
@@ -399,14 +399,14 @@ export const ServicesStackInteractor: React.FC<ServicesStackInteractorProps> = (
                         onClick={() => handleItemHover(row.rightIdx)}
                         className={cn(
                           "group cursor-pointer flex items-start gap-3.5 py-1.5 px-2.5 -mx-2.5 rounded-lg transition-colors duration-150",
-                          isRightActive ? "bg-orange-50/80" : "hover:bg-zinc-50"
+                          isRightActive ? "bg-zinc-100/90 shadow-xs" : "hover:bg-zinc-50"
                         )}
                       >
                         <span
                           className={cn(
                             "text-xs sm:text-sm font-mono tracking-wider pt-0.5 transition-colors duration-150 shrink-0",
                             isRightActive
-                              ? "text-orange-600 font-bold"
+                              ? "text-zinc-950 font-bold"
                               : "text-zinc-400 group-hover:text-zinc-600"
                           )}
                         >
@@ -416,8 +416,8 @@ export const ServicesStackInteractor: React.FC<ServicesStackInteractorProps> = (
                           className={cn(
                             "text-[14.5px] sm:text-[15px] xl:text-[15.5px] leading-snug font-medium transition-colors duration-150",
                             isRightActive
-                              ? "text-orange-600"
-                              : "text-zinc-700 group-hover:text-zinc-950"
+                              ? "text-zinc-950 font-semibold"
+                              : "text-zinc-600 group-hover:text-zinc-950"
                           )}
                         >
                           {row.right.name}

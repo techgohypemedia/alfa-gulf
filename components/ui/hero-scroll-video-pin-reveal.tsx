@@ -164,7 +164,13 @@ export const HeroScrollVideoReveal: React.FC<HeroScrollVideoRevealProps> = ({
   showPlayButton = false,
   className = "",
 }) => {
+  const corporateSectionRef = useRef<HTMLElement>(null)
+  const badgeRef = useRef<HTMLDivElement>(null)
+  const titleRef = useRef<HTMLHeadingElement>(null)
+  const descRef = useRef<HTMLParagraphElement>(null)
+  const headerLineRef = useRef<HTMLDivElement>(null)
   const pillarsRef = useRef<HTMLDivElement>(null)
+  const pillarCardRefs = useRef<(HTMLDivElement | null)[]>([])
   const sectorsSectionRef = useRef<HTMLElement>(null)
   const headingRef = useRef<HTMLHeadingElement>(null)
   const cardRefs = useRef<(HTMLDivElement | null)[]>([])
@@ -173,6 +179,72 @@ export const HeroScrollVideoReveal: React.FC<HeroScrollVideoRevealProps> = ({
   const videoRef = useRef<HTMLVideoElement>(null)
   const topHudRef = useRef<HTMLDivElement>(null)
   const overlayContentRef = useRef<HTMLDivElement>(null)
+
+  const handlePillarHover = (idx: number, isHovering: boolean) => {
+    const card = pillarCardRefs.current[idx]
+    if (!card) return
+    const tag = card.querySelector(".pillar-tag")
+    const dot = card.querySelector(".pillar-dot")
+    const line = card.querySelector(".pillar-accent-line")
+
+    if (isHovering) {
+      gsap.to(card, { y: -5, duration: 0.35, ease: "power2.out" })
+      if (tag) gsap.to(tag, { x: 5, duration: 0.25, ease: "power2.out" })
+      if (dot) gsap.to(dot, { scale: 2.0, backgroundColor: "#09090b", duration: 0.3, ease: "back.out(2)" })
+      if (line) gsap.to(line, { scaleX: 1, duration: 0.35, ease: "power2.out" })
+    } else {
+      gsap.to(card, { y: 0, duration: 0.35, ease: "power2.out" })
+      if (tag) gsap.to(tag, { x: 0, duration: 0.25, ease: "power2.out" })
+      if (dot) gsap.to(dot, { scale: 1, backgroundColor: "#d4d4d8", duration: 0.3 })
+      if (line) gsap.to(line, { scaleX: 0, duration: 0.35, ease: "power2.out" })
+    }
+  }
+
+  const handleSectorHover = (idx: number, isHovering: boolean) => {
+    const card = cardRefs.current[idx]
+    if (!card) return
+    const icon = card.querySelector(".sector-icon-wrap")
+    const tags = card.querySelectorAll(".sector-tag-pill")
+
+    if (isHovering) {
+      gsap.to(card, { y: -6, duration: 0.35, ease: "power2.out" })
+      if (icon) {
+        gsap.to(icon, {
+          y: -5,
+          scale: 1.1,
+          duration: 0.35,
+          ease: "power2.out",
+        })
+      }
+      if (tags.length) {
+        gsap.to(tags, {
+          backgroundColor: "#09090b",
+          color: "#ffffff",
+          borderColor: "#09090b",
+          stagger: 0.04,
+          duration: 0.25,
+        })
+      }
+    } else {
+      gsap.to(card, { y: 0, duration: 0.35, ease: "power2.out" })
+      if (icon) {
+        gsap.to(icon, {
+          y: 0,
+          scale: 1,
+          duration: 0.35,
+          ease: "power2.out",
+        })
+      }
+      if (tags.length) {
+        gsap.to(tags, {
+          backgroundColor: "#f4f4f5",
+          color: "#52525b",
+          borderColor: "transparent",
+          duration: 0.25,
+        })
+      }
+    }
+  }
 
   useEffect(() => {
     // Ensure video plays smoothly in background
@@ -183,64 +255,102 @@ export const HeroScrollVideoReveal: React.FC<HeroScrollVideoRevealProps> = ({
     }
 
     const ctx = gsap.context(() => {
-      // ── 1. Top Pillars Reveal ──────────────────────────────────────────────
-      if (pillarsRef.current) {
-        gsap.fromTo(
-          pillarsRef.current.children,
-          { opacity: 0, y: 25 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            stagger: 0.15,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: pillarsRef.current,
-              start: "top 85%",
-              toggleActions: "play none none reverse",
+      // ── 1. Architectural Corporate Foundation Reveal ────────────────────────
+      if (corporateSectionRef.current) {
+        const corpTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: corporateSectionRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        })
+
+        if (badgeRef.current) {
+          corpTl.fromTo(
+            badgeRef.current,
+            { opacity: 0, y: 15 },
+            { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }
+          )
+        }
+
+        if (titleRef.current) {
+          corpTl.fromTo(
+            titleRef.current,
+            { opacity: 0, y: 30 },
+            { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
+            "-=0.35"
+          )
+        }
+
+        if (descRef.current) {
+          corpTl.fromTo(
+            descRef.current,
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
+            "-=0.5"
+          )
+        }
+
+        if (headerLineRef.current) {
+          corpTl.fromTo(
+            headerLineRef.current,
+            { scaleX: 0 },
+            { scaleX: 1, duration: 1.0, ease: "power2.inOut" },
+            "-=0.5"
+          )
+        }
+
+        const validPillars = pillarCardRefs.current.filter(Boolean) as HTMLDivElement[]
+        if (validPillars.length > 0) {
+          corpTl.fromTo(
+            validPillars,
+            { opacity: 0, y: 35 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.85,
+              stagger: 0.15,
+              ease: "power3.out",
             },
-          }
-        )
+            "-=0.4"
+          )
+        }
       }
 
       // ── 2. "Our sectors" Section: Clean Upward Stagger Reveal on Scroll ───
       const validCards = cardRefs.current.filter(Boolean) as HTMLDivElement[]
 
-      if (headingRef.current) {
-        gsap.fromTo(
-          headingRef.current,
-          { opacity: 0, y: 25 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: sectorsSectionRef.current,
-              start: "top 82%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        )
-      }
+      if (sectorsSectionRef.current) {
+        const secTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectorsSectionRef.current,
+            start: "top 78%",
+            toggleActions: "play none none reverse",
+          },
+        })
 
-      if (validCards.length > 0) {
-        gsap.fromTo(
-          validCards,
-          { opacity: 0, y: 35 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.85,
-            stagger: 0.16,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: sectorsSectionRef.current,
-              start: "top 78%",
-              toggleActions: "play none none reverse",
+        if (headingRef.current) {
+          secTl.fromTo(
+            headingRef.current,
+            { opacity: 0, y: 25 },
+            { opacity: 1, y: 0, duration: 0.75, ease: "power3.out" }
+          )
+        }
+
+        if (validCards.length > 0) {
+          secTl.fromTo(
+            validCards,
+            { opacity: 0, y: 35 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.85,
+              stagger: 0.16,
+              ease: "power3.out",
             },
-          }
-        )
+            "-=0.4"
+          )
+        }
       }
 
       // ── 3. High-Performance Architectural Video Pin Reveal ─────────────────
@@ -403,27 +513,40 @@ export const HeroScrollVideoReveal: React.FC<HeroScrollVideoRevealProps> = ({
 
       {/* ── Section 1: Architectural Corporate Profile & Core Pillars ──────── */}
       <section
+        ref={corporateSectionRef}
         className="w-full pt-20 sm:pt-28 pb-16 sm:pb-20 px-6 sm:px-10 lg:px-16 bg-white border-b border-zinc-200/80"
         style={{ backgroundColor: "#ffffff" }}
       >
         <div className="max-w-[1440px] mx-auto">
           {/* Header Row: Title & Editorial Narrative */}
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-12 sm:pb-16 border-b border-zinc-200/80">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-12 sm:pb-16">
             <div className="space-y-3.5 max-w-2xl">
-              <div className="flex items-center gap-2.5">
-                <span className="w-2 h-2 rounded-full bg-orange-500" />
+              <div ref={badgeRef} className="flex items-center gap-2.5">
+                <span className="w-2 h-2 rounded-full bg-zinc-950" />
                 <span className="text-xs sm:text-sm font-semibold tracking-wider text-zinc-500 uppercase">
                   Corporate Foundation
                 </span>
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-normal tracking-tight text-zinc-950 leading-[1.12]">
+              <h2
+                ref={titleRef}
+                className="text-3xl sm:text-4xl lg:text-[46px] font-normal tracking-tight text-zinc-950 leading-[1.12]"
+              >
                 Engineering monumental structures with uncompromising precision.
               </h2>
             </div>
-            <p className="text-[15px] sm:text-base text-zinc-600 max-w-md leading-relaxed font-normal">
+            <p
+              ref={descRef}
+              className="text-[15px] sm:text-base text-zinc-600 max-w-md leading-relaxed font-normal"
+            >
               Operating at the forefront of Saudi Arabia&apos;s construction renaissance, ALFA GULF integrates multidisciplinary engineering to bring iconic architectural visions to life.
             </p>
           </div>
+
+          {/* Animated Architectural Blueprint Horizontal Line */}
+          <div
+            ref={headerLineRef}
+            className="w-full h-[1px] bg-zinc-200/80 origin-left"
+          />
 
           {/* 3 Modular Architectural Pillars */}
           <div
@@ -431,51 +554,75 @@ export const HeroScrollVideoReveal: React.FC<HeroScrollVideoRevealProps> = ({
             className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 pt-12 sm:pt-14 divide-y md:divide-y-0 md:divide-x divide-zinc-200/80"
           >
             {/* 01: Who We Are */}
-            <div className="pt-8 md:pt-0 md:pr-8 lg:pr-12 space-y-4">
+            <div
+              ref={(el) => {
+                pillarCardRefs.current[0] = el
+              }}
+              onMouseEnter={() => handlePillarHover(0, true)}
+              onMouseLeave={() => handlePillarHover(0, false)}
+              className="group cursor-pointer pt-8 md:pt-0 md:pr-8 lg:pr-12 space-y-4"
+            >
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono font-bold tracking-widest text-orange-600 uppercase">
+                <span className="pillar-tag text-xs font-mono font-bold tracking-widest text-zinc-950 uppercase inline-block">
                   01 // {whoWeAre.label}
                 </span>
-                <span className="w-1.5 h-1.5 rounded-full bg-zinc-300" />
+                <span className="pillar-dot w-1.5 h-1.5 rounded-full bg-zinc-300 inline-block" />
               </div>
-              <h3 className="text-xl sm:text-2xl font-semibold text-zinc-950 tracking-tight leading-snug">
+              <h3 className="text-xl sm:text-2xl font-semibold text-zinc-950 tracking-tight leading-snug group-hover:text-zinc-700 transition-colors">
                 Transforming ideas into enduring landmarks.
               </h3>
               <p className="text-[14.5px] sm:text-[15px] text-zinc-600 leading-relaxed font-normal">
                 {whoWeAre.text}
               </p>
+              <div className="pillar-accent-line w-full h-[1.5px] bg-zinc-950 origin-left scale-x-0" />
             </div>
 
             {/* 02: Our Mission */}
-            <div className="pt-8 md:pt-0 md:px-8 lg:px-12 space-y-4">
+            <div
+              ref={(el) => {
+                pillarCardRefs.current[1] = el
+              }}
+              onMouseEnter={() => handlePillarHover(1, true)}
+              onMouseLeave={() => handlePillarHover(1, false)}
+              className="group cursor-pointer pt-8 md:pt-0 md:px-8 lg:px-12 space-y-4"
+            >
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono font-bold tracking-widest text-orange-600 uppercase">
+                <span className="pillar-tag text-xs font-mono font-bold tracking-widest text-zinc-950 uppercase inline-block">
                   02 // {ourMission.label}
                 </span>
-                <span className="w-1.5 h-1.5 rounded-full bg-zinc-300" />
+                <span className="pillar-dot w-1.5 h-1.5 rounded-full bg-zinc-300 inline-block" />
               </div>
-              <h3 className="text-xl sm:text-2xl font-semibold text-zinc-950 tracking-tight leading-snug">
+              <h3 className="text-xl sm:text-2xl font-semibold text-zinc-950 tracking-tight leading-snug group-hover:text-zinc-700 transition-colors">
                 Empowering Saudi Vision 2030.
               </h3>
               <p className="text-[14.5px] sm:text-[15px] text-zinc-600 leading-relaxed font-normal">
                 {ourMission.text.replace(/^"|"$/g, "")}
               </p>
+              <div className="pillar-accent-line w-full h-[1.5px] bg-zinc-950 origin-left scale-x-0" />
             </div>
 
             {/* 03: Core Values */}
-            <div className="pt-8 md:pt-0 md:pl-8 lg:pl-12 space-y-4">
+            <div
+              ref={(el) => {
+                pillarCardRefs.current[2] = el
+              }}
+              onMouseEnter={() => handlePillarHover(2, true)}
+              onMouseLeave={() => handlePillarHover(2, false)}
+              className="group cursor-pointer pt-8 md:pt-0 md:pl-8 lg:pl-12 space-y-4"
+            >
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono font-bold tracking-widest text-orange-600 uppercase">
+                <span className="pillar-tag text-xs font-mono font-bold tracking-widest text-zinc-950 uppercase inline-block">
                   03 // {coreValues.label}
                 </span>
-                <span className="w-1.5 h-1.5 rounded-full bg-zinc-300" />
+                <span className="pillar-dot w-1.5 h-1.5 rounded-full bg-zinc-300 inline-block" />
               </div>
-              <h3 className="text-xl sm:text-2xl font-semibold text-zinc-950 tracking-tight leading-snug">
+              <h3 className="text-xl sm:text-2xl font-semibold text-zinc-950 tracking-tight leading-snug group-hover:text-zinc-700 transition-colors">
                 Unyielding integrity & safety.
               </h3>
               <p className="text-[14.5px] sm:text-[15px] text-zinc-600 leading-relaxed font-normal">
                 {coreValues.text}
               </p>
+              <div className="pillar-accent-line w-full h-[1.5px] bg-zinc-950 origin-left scale-x-0" />
             </div>
           </div>
         </div>
@@ -504,16 +651,18 @@ export const HeroScrollVideoReveal: React.FC<HeroScrollVideoRevealProps> = ({
                 ref={(el) => {
                   cardRefs.current[idx] = el
                 }}
-                className="flex flex-col justify-between"
+                onMouseEnter={() => handleSectorHover(idx, true)}
+                onMouseLeave={() => handleSectorHover(idx, false)}
+                className="group cursor-pointer flex flex-col justify-between"
               >
                 <div>
-                  {/* Minimal Icon directly on white canvas */}
-                  <div className="mb-6 text-zinc-900">
+                  {/* Minimal Icon directly on white canvas with GSAP interactive wrapper */}
+                  <div className="sector-icon-wrap mb-6 text-zinc-900 inline-block origin-bottom-left">
                     <SectorIcon type={sector.iconType} />
                   </div>
 
                   {/* Sector Title */}
-                  <h3 className="text-2xl sm:text-[26px] font-bold text-zinc-950 tracking-tight leading-snug mb-4">
+                  <h3 className="text-2xl sm:text-[26px] font-bold text-zinc-950 tracking-tight leading-snug mb-4 group-hover:text-zinc-700 transition-colors">
                     {sector.title}
                   </h3>
 
@@ -528,7 +677,7 @@ export const HeroScrollVideoReveal: React.FC<HeroScrollVideoRevealProps> = ({
                   {sector.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-3 py-1 rounded-md bg-zinc-100 text-zinc-600 text-xs font-medium"
+                      className="sector-tag-pill px-3 py-1 rounded-md bg-zinc-100 border border-transparent text-zinc-600 text-xs font-medium"
                     >
                       {tag}
                     </span>
@@ -546,7 +695,7 @@ export const HeroScrollVideoReveal: React.FC<HeroScrollVideoRevealProps> = ({
         <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 pt-4 pb-8 flex flex-col md:flex-row md:items-end justify-between gap-6 border-t border-zinc-200/80">
           <div className="space-y-2">
             <div className="flex items-center gap-2.5">
-              <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-zinc-950 animate-pulse" />
               <span className="text-xs sm:text-sm font-semibold tracking-wider text-zinc-500 uppercase">
                 Megaproject Execution
               </span>
@@ -626,8 +775,8 @@ export const HeroScrollVideoReveal: React.FC<HeroScrollVideoRevealProps> = ({
             >
               <div className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl bg-black/55 backdrop-blur-xl border border-white/20 text-white shadow-2xl space-y-2.5 sm:space-y-3.5 pointer-events-auto">
                 <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-orange-500" />
-                  <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-orange-400 uppercase">
+                  <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-white" />
+                  <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-zinc-300 uppercase">
                     FIELD EXECUTION RIGOR
                   </span>
                 </div>
