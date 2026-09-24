@@ -5,7 +5,6 @@ import { BuildingForTheBest } from "@/components/sections/building-for-the-best/
 import { ServicesStackInteractor } from "@/components/ui/connoisseur-stack-interactor"
 import { ProjectsCoverflowSection } from "@/components/sections/projects-coverflow"
 import { ImageTextReveal } from "@/components/ui/image-text-reveal"
-import { HoverFooter } from "@/components/sections/footer"
 
 export default function Home() {
   return (
@@ -30,9 +29,6 @@ export default function Home() {
 
       {/* 6. Projects Section with 3D Coverflow Carousel (at the bottom) */}
       <ProjectsCoverflowSection />
-
-      {/* 7. Light-themed Modern Hover Footer */}
-      <HoverFooter />
     </div>
   )
 }

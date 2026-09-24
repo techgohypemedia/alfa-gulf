@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect, useId } from "react"
 import gsap from "gsap"
+import Link from "next/link"
 import { cn } from "@/lib/utils"
 
 export type PatternType = "bento" | "pixels" | "hexagons" | "louvers" | "technical"
@@ -11,6 +12,7 @@ export interface MenuItem {
   name: string
   image: string
   pattern: PatternType
+  slug: string
   clipId?: string
   category?: string
 }
@@ -22,6 +24,7 @@ export const DEFAULT_ALFAGULF_SERVICES: MenuItem[] = [
     pattern: "bento",
     image: "/services/commercial_projects.jpg",
     category: "Commercial Infrastructure",
+    slug: "commercial-projects",
   },
   {
     num: "02",
@@ -29,6 +32,7 @@ export const DEFAULT_ALFAGULF_SERVICES: MenuItem[] = [
     pattern: "pixels",
     image: "/services/steel_structures.jpg",
     category: "Industrial Engineering",
+    slug: "steel-structures",
   },
   {
     num: "03",
@@ -36,6 +40,7 @@ export const DEFAULT_ALFAGULF_SERVICES: MenuItem[] = [
     pattern: "hexagons",
     image: "/services/residential_villas.jpg",
     category: "Luxury Architecture",
+    slug: "residential-buildings-villas",
   },
   {
     num: "04",
@@ -43,6 +48,7 @@ export const DEFAULT_ALFAGULF_SERVICES: MenuItem[] = [
     pattern: "louvers",
     image: "/services/fitout_works.jpg",
     category: "Interior Architecture",
+    slug: "fitout-works",
   },
   {
     num: "05",
@@ -50,6 +56,7 @@ export const DEFAULT_ALFAGULF_SERVICES: MenuItem[] = [
     pattern: "technical",
     image: "/services/mep_services.jpg",
     category: "Mechanical & Electrical",
+    slug: "mep-services",
   },
   {
     num: "06",
@@ -57,6 +64,7 @@ export const DEFAULT_ALFAGULF_SERVICES: MenuItem[] = [
     pattern: "pixels",
     image: "/services/cctv_it_services.jpg",
     category: "Mission-Critical Technology",
+    slug: "cctv-it-sales",
   },
   {
     num: "07",
@@ -64,6 +72,7 @@ export const DEFAULT_ALFAGULF_SERVICES: MenuItem[] = [
     pattern: "bento",
     image: "/services/landscaping_works.jpg",
     category: "Sustainable Landscape",
+    slug: "landscaping-works",
   },
   {
     num: "08",
@@ -71,6 +80,7 @@ export const DEFAULT_ALFAGULF_SERVICES: MenuItem[] = [
     pattern: "louvers",
     image: "/services/building_materials.jpg",
     category: "Logistics & Supply",
+    slug: "building-materials",
   },
   {
     num: "09",
@@ -78,6 +88,7 @@ export const DEFAULT_ALFAGULF_SERVICES: MenuItem[] = [
     pattern: "technical",
     image: "/services/hvac_division.jpg",
     category: "Climate & Air Systems",
+    slug: "hvac-division",
   },
   {
     num: "10",
@@ -85,6 +96,7 @@ export const DEFAULT_ALFAGULF_SERVICES: MenuItem[] = [
     pattern: "hexagons",
     image: "/services/demolition_renovation.jpg",
     category: "Renovation & Restoration",
+    slug: "demolition-renovation",
   },
 ]
 
@@ -319,30 +331,40 @@ export const ServicesStackInteractor: React.FC<ServicesStackInteractorProps> = (
                     key={item.num}
                     onClick={() => handleItemHover(idx)}
                     className={cn(
-                      "group cursor-pointer flex items-start gap-3 py-2.5 px-2 rounded-lg transition-colors duration-150",
+                      "group cursor-pointer flex flex-col gap-1 py-2.5 px-2 rounded-lg transition-colors duration-150",
                       isActive ? "bg-zinc-100/90 shadow-xs" : "active:bg-zinc-50"
                     )}
                   >
-                    <span
-                      className={cn(
-                        "text-xs font-mono tracking-wider pt-0.5 transition-colors duration-150 shrink-0",
-                        isActive
-                          ? "text-zinc-950 font-bold"
-                          : "text-zinc-400 group-hover:text-zinc-600"
-                      )}
-                    >
-                      {item.num}
-                    </span>
-                    <span
-                      className={cn(
-                        "text-[14.5px] leading-snug font-medium transition-colors duration-150",
-                        isActive
-                          ? "text-zinc-950 font-semibold"
-                          : "text-zinc-600 group-hover:text-zinc-950"
-                      )}
-                    >
-                      {item.name}
-                    </span>
+                    <div className="flex items-start gap-3">
+                      <span
+                        className={cn(
+                          "text-xs font-mono tracking-wider pt-0.5 transition-colors duration-150 shrink-0",
+                          isActive
+                            ? "text-zinc-950 font-bold"
+                            : "text-zinc-400 group-hover:text-zinc-600"
+                        )}
+                      >
+                        {item.num}
+                      </span>
+                      <span
+                        className={cn(
+                          "text-[14.5px] leading-snug font-medium transition-colors duration-150",
+                          isActive
+                            ? "text-zinc-950 font-semibold"
+                            : "text-zinc-600 group-hover:text-zinc-950"
+                        )}
+                      >
+                        {item.name}
+                      </span>
+                    </div>
+                    {isActive && (
+                      <Link
+                        href={`/services/${item.slug}`}
+                        className="text-xs font-semibold text-blue-600 hover:text-blue-800 ml-8 mt-1 inline-flex items-center gap-1 transition-colors"
+                      >
+                        Explore details <span aria-hidden="true">&rarr;</span>
+                      </Link>
+                    )}
                   </div>
                 )
               })}
@@ -365,30 +387,40 @@ export const ServicesStackInteractor: React.FC<ServicesStackInteractorProps> = (
                         onMouseEnter={() => handleItemHover(row.leftIdx)}
                         onClick={() => handleItemHover(row.leftIdx)}
                         className={cn(
-                          "group cursor-pointer flex items-start gap-3.5 py-1.5 px-2.5 -mx-2.5 rounded-lg transition-colors duration-150",
+                          "group cursor-pointer flex flex-col gap-1 py-1.5 px-2.5 -mx-2.5 rounded-lg transition-colors duration-150",
                           isLeftActive ? "bg-zinc-100/90 shadow-xs" : "hover:bg-zinc-50"
                         )}
                       >
-                        <span
-                          className={cn(
-                            "text-xs sm:text-sm font-mono tracking-wider pt-0.5 transition-colors duration-150 shrink-0",
-                            isLeftActive
-                              ? "text-zinc-950 font-bold"
-                              : "text-zinc-400 group-hover:text-zinc-600"
-                          )}
-                        >
-                          {row.left.num}
-                        </span>
-                        <span
-                          className={cn(
-                            "text-[14.5px] sm:text-[15px] xl:text-[15.5px] leading-snug font-medium transition-colors duration-150",
-                            isLeftActive
-                              ? "text-zinc-950 font-semibold"
-                              : "text-zinc-600 group-hover:text-zinc-950"
-                          )}
-                        >
-                          {row.left.name}
-                        </span>
+                        <div className="flex items-start gap-3.5">
+                          <span
+                            className={cn(
+                              "text-xs sm:text-sm font-mono tracking-wider pt-0.5 transition-colors duration-150 shrink-0",
+                              isLeftActive
+                                ? "text-zinc-950 font-bold"
+                                : "text-zinc-400 group-hover:text-zinc-600"
+                            )}
+                          >
+                            {row.left.num}
+                          </span>
+                          <span
+                            className={cn(
+                              "text-[14.5px] sm:text-[15px] xl:text-[15.5px] leading-snug font-medium transition-colors duration-150",
+                              isLeftActive
+                                ? "text-zinc-950 font-semibold"
+                                : "text-zinc-600 group-hover:text-zinc-950"
+                            )}
+                          >
+                            {row.left.name}
+                          </span>
+                        </div>
+                        {isLeftActive && (
+                          <Link
+                            href={`/services/${row.left.slug}`}
+                            className="text-xs sm:text-sm font-medium text-blue-600 hover:text-blue-800 ml-8 mt-1 inline-flex items-center gap-1 transition-colors"
+                          >
+                            Explore details <span aria-hidden="true">&rarr;</span>
+                          </Link>
+                        )}
                       </div>
                     )}
 
@@ -398,30 +430,40 @@ export const ServicesStackInteractor: React.FC<ServicesStackInteractorProps> = (
                         onMouseEnter={() => handleItemHover(row.rightIdx)}
                         onClick={() => handleItemHover(row.rightIdx)}
                         className={cn(
-                          "group cursor-pointer flex items-start gap-3.5 py-1.5 px-2.5 -mx-2.5 rounded-lg transition-colors duration-150",
+                          "group cursor-pointer flex flex-col gap-1 py-1.5 px-2.5 -mx-2.5 rounded-lg transition-colors duration-150",
                           isRightActive ? "bg-zinc-100/90 shadow-xs" : "hover:bg-zinc-50"
                         )}
                       >
-                        <span
-                          className={cn(
-                            "text-xs sm:text-sm font-mono tracking-wider pt-0.5 transition-colors duration-150 shrink-0",
-                            isRightActive
-                              ? "text-zinc-950 font-bold"
-                              : "text-zinc-400 group-hover:text-zinc-600"
-                          )}
-                        >
-                          {row.right.num}
-                        </span>
-                        <span
-                          className={cn(
-                            "text-[14.5px] sm:text-[15px] xl:text-[15.5px] leading-snug font-medium transition-colors duration-150",
-                            isRightActive
-                              ? "text-zinc-950 font-semibold"
-                              : "text-zinc-600 group-hover:text-zinc-950"
-                          )}
-                        >
-                          {row.right.name}
-                        </span>
+                        <div className="flex items-start gap-3.5">
+                          <span
+                            className={cn(
+                              "text-xs sm:text-sm font-mono tracking-wider pt-0.5 transition-colors duration-150 shrink-0",
+                              isRightActive
+                                ? "text-zinc-950 font-bold"
+                                : "text-zinc-400 group-hover:text-zinc-600"
+                            )}
+                          >
+                            {row.right.num}
+                          </span>
+                          <span
+                            className={cn(
+                              "text-[14.5px] sm:text-[15px] xl:text-[15.5px] leading-snug font-medium transition-colors duration-150",
+                              isRightActive
+                                ? "text-zinc-950 font-semibold"
+                                : "text-zinc-600 group-hover:text-zinc-950"
+                            )}
+                          >
+                            {row.right.name}
+                          </span>
+                        </div>
+                        {isRightActive && (
+                          <Link
+                            href={`/services/${row.right.slug}`}
+                            className="text-xs sm:text-sm font-medium text-blue-600 hover:text-blue-800 ml-8 mt-1 inline-flex items-center gap-1 transition-colors"
+                          >
+                            Explore details <span aria-hidden="true">&rarr;</span>
+                          </Link>
+                        )}
                       </div>
                     )}
                   </div>

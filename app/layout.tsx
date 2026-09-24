@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 
 import { Navbar } from "@/components/navigation";
+import { HoverFooter } from "@/components/sections/footer";
 
 const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
@@ -28,9 +29,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", inter.variable)}
     >
-      <body className="min-h-full flex flex-col bg-white text-slate-900">
+      <body suppressHydrationWarning className="min-h-full flex flex-col bg-white text-slate-900">
         <Navbar />
         <main className="flex-1">{children}</main>
+        <HoverFooter />
       </body>
     </html>
   );

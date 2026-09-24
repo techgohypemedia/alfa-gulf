@@ -8,6 +8,8 @@ import {
   Menu,
   X,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   Phone,
   Mail,
   MapPin,
@@ -23,68 +25,169 @@ import {
   Hammer,
   Send,
   ArrowRight,
+  Check,
 } from "lucide-react"
 
 // Real Alfa Gulf Services
 const SERVICES = [
   {
+    num: "01",
     title: "Commercial Projects",
-    href: "/services/commercial-buildings",
-    description: "Office towers, commercial hubs, and corporate complexes",
+    category: "CONSTRUCTION",
+    href: "/services/commercial-projects",
+    description: "Office towers, commercial hubs & corporate...",
+    detailText: "We deliver modern commercial spaces, office towers and business hubs designed for growth, functionality and long-term value.",
+    checklist: [
+      "Civil Construction",
+      "Structural Works",
+      "MEP Coordination",
+      "Project Management",
+    ],
+    previewImage: "/services/commercial_projects.jpg",
     icon: Building2,
   },
   {
-    title: "Steel Structure & Fire Proofing",
-    href: "/services/steel-proofing",
-    description: "Certified intumescent coating & industrial structural steel",
-    icon: Flame,
-  },
-  {
+    num: "02",
     title: "Residential Complex & Villas",
-    href: "/services/residential-villas",
-    description: "Luxury villas, residential compounds, and high-end living",
+    category: "RESIDENTIAL",
+    href: "/services/residential-buildings-villas",
+    description: "Luxury villas, residential compounds & high-end...",
+    detailText: "High-end residential compounds, modern apartment complexes, and luxury villa developments built to international structural and architectural standards.",
+    checklist: [
+      "Turnkey Villa Construction",
+      "Residential Compounds",
+      "Custom Interior Finishes",
+      "Smart Home Ready",
+    ],
+    previewImage: "/services/residential_villas.jpg",
     icon: HomeIcon,
   },
   {
-    title: "Fit-Out Works",
-    href: "/services/fit-out-works",
-    description: "Premium interior fit-out, finishes, and turnkey delivery",
-    icon: Wrench,
-  },
-  {
+    num: "03",
     title: "MEP Services",
+    category: "ENGINEERING",
     href: "/services/mep-services",
-    description: "Mechanical, electrical, plumbing, and low-current integration",
+    description: "Mechanical, electrical, plumbing & low-current...",
+    detailText: "Complete mechanical, electrical, plumbing, and low-current systems engineering designed for high efficiency, safety, and modern building standards.",
+    checklist: [
+      "HVAC & Piping Systems",
+      "Electrical Distribution",
+      "Plumbing & Drainage",
+      "Low Voltage & Automation",
+    ],
+    previewImage: "/services/mep_services.jpg",
     icon: Zap,
   },
   {
+    num: "04",
+    title: "Steel Structure & Fire Proofing",
+    category: "INDUSTRIAL",
+    href: "/services/steel-structures",
+    description: "Certified intumescent coating & industrial structural...",
+    detailText: "Industrial structural steel fabrication, erection, and UL-certified intumescent fireproofing solutions for commercial and heavy industrial assets.",
+    checklist: [
+      "Structural Steel Erection",
+      "Intumescent Fire Coating",
+      "Warehouse & Hangar Steel",
+      "Quality & Safety Certified",
+    ],
+    previewImage: "/services/steel_structures.jpg",
+    icon: Flame,
+  },
+  {
+    num: "05",
+    title: "Fit-Out Works",
+    category: "INTERIORS",
+    href: "/services/fitout-works",
+    description: "Premium interior fit-out, finishes, and turnkey delivery",
+    detailText: "Bespoke corporate fit-outs, luxury retail interiors, acoustic ceilings, and high-end architectural wall cladding crafted with precision execution.",
+    checklist: [
+      "Corporate Office Fit-Out",
+      "Gypsum & Acoustic Ceilings",
+      "Custom Millwork & Joinery",
+      "Turnkey Project Delivery",
+    ],
+    previewImage: "/services/fitout_works.jpg",
+    icon: Wrench,
+  },
+  {
+    num: "06",
     title: "IT & CCTV Services",
-    href: "/services/it-cctv-services",
-    description: "Security surveillance, networking, and smart building tech",
+    category: "SECURITY & TECH",
+    href: "/services/cctv-it-sales",
+    description: "Security surveillance, networking, and smart building...",
+    detailText: "Enterprise AI-powered CCTV surveillance, biometric access control, optical fiber networking, and server room infrastructure solutions.",
+    checklist: [
+      "AI CCTV Surveillance",
+      "Biometric Access Control",
+      "Structured Cabling & Fiber",
+      "Data Center Setup",
+    ],
+    previewImage: "/services/cctv_it_services.jpg",
     icon: Camera,
   },
   {
+    num: "07",
     title: "Landscaping Works",
+    category: "ENVIRONMENTAL",
     href: "/services/landscaping-works",
-    description: "Hardscaping, irrigation systems, and architectural greenery",
+    description: "Hardscaping, irrigation systems, and architectural...",
+    detailText: "Architectural softscaping, custom stone hardscaping, smart automated irrigation systems, and exterior landscape illumination.",
+    checklist: [
+      "Architectural Softscaping",
+      "Hardscaping & Pergolas",
+      "Smart Irrigation Systems",
+      "Outdoor Lighting & Waterscapes",
+    ],
+    previewImage: "/services/landscaping_works.jpg",
     icon: Trees,
   },
   {
+    num: "08",
     title: "Building Material Supplies",
-    href: "/services/material-supply",
+    category: "SUPPLY CHAIN",
+    href: "/services/building-materials",
     description: "Direct procurement of certified construction materials",
+    detailText: "Certified deformed steel rebar, ready-mix concrete, thermal insulation, and high-tensile structural building materials supplied directly to major projects.",
+    checklist: [
+      "Deformed Steel Rebar",
+      "Ready-Mix Concrete",
+      "Thermal & Acoustic Insulation",
+      "Certified Quality Materials",
+    ],
+    previewImage: "/services/steel_rebar_supply.jpg",
     icon: Package,
   },
   {
+    num: "09",
     title: "HVAC Systems",
-    href: "/services/hfac-systems",
-    description: "Engineered ventilation, cooling plants, and ducting systems",
+    category: "CLIMATE CONTROL",
+    href: "/services/hvac-division",
+    description: "Engineered ventilation, cooling plants, and ducting...",
+    detailText: "Heavy industrial chilled water plants, ducted split units, VRF systems, and clean-room ventilation engineered for extreme desert conditions.",
+    checklist: [
+      "Chilled Water Central Plants",
+      "Ductwork Fabrication",
+      "VRF & Package Units",
+      "Preventive Maintenance",
+    ],
+    previewImage: "/services/chilled_water_plant.jpg",
     icon: Wind,
   },
   {
+    num: "10",
     title: "Demolition & Renovation",
-    href: "/services/demolish-renovate",
+    category: "STRUCTURAL WORKS",
+    href: "/services/demolition-renovation",
     description: "Safe controlled dismantling and structural retrofitting",
+    detailText: "Controlled robotic demolition, heavy concrete saw cutting, structural retrofitting, interior gutting, and site clearing executed under strict safety protocols.",
+    checklist: [
+      "Controlled Demolition",
+      "Structural Concrete Retrofitting",
+      "Interior Gutting & Strip-Out",
+      "Hazardous Material Remediation",
+    ],
+    previewImage: "/services/structural_demolition.jpg",
     icon: Hammer,
   },
 ]
@@ -92,6 +195,7 @@ const SERVICES = [
 export function Navbar() {
   const [isOverHero, setIsOverHero] = React.useState(true)
   const [isServicesOpen, setIsServicesOpen] = React.useState(false)
+  const [activeServiceIdx, setActiveServiceIdx] = React.useState(0)
   const [isSearchOpen, setIsSearchOpen] = React.useState(false)
   const [isContactOpen, setIsContactOpen] = React.useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
@@ -160,7 +264,7 @@ export function Navbar() {
   const handleMouseLeaveServices = () => {
     dropdownTimerRef.current = setTimeout(() => {
       setIsServicesOpen(false)
-    }, 150)
+    }, 250)
   }
 
   const handleInquirySubmit = (e: React.FormEvent) => {
@@ -190,10 +294,10 @@ export function Navbar() {
             : "bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm"
         }`}
       >
-        {/* Top accent bar line - matches screenshot's dark upper strip, visible when solid */}
+        {/* Top accent bar line - brand azure blue line matching website palette */}
         <div
           className={`h-[3px] w-full transition-all duration-300 ${
-            isTransparent ? "opacity-0 bg-transparent" : "opacity-100 bg-[#282d37]"
+            isTransparent ? "opacity-0 bg-transparent" : "opacity-100 bg-[#0081c6]"
           }`}
         />
 
@@ -259,9 +363,9 @@ export function Navbar() {
                   />
                 </Link>
 
-                {/* SERVICES Dropdown */}
+                {/* SERVICES Nav Item */}
                 <div
-                  className="relative"
+                  className="relative py-2"
                   onMouseEnter={handleMouseEnterServices}
                   onMouseLeave={handleMouseLeaveServices}
                 >
@@ -269,7 +373,7 @@ export function Navbar() {
                     type="button"
                     onClick={() => setIsServicesOpen(!isServicesOpen)}
                     aria-expanded={isServicesOpen}
-                    className={`flex items-center gap-1 text-[13px] font-bold tracking-[0.08em] uppercase transition-colors py-2 relative group focus:outline-none ${
+                    className={`flex items-center gap-1 text-[13px] font-bold tracking-[0.08em] uppercase transition-colors relative group focus:outline-none ${
                       isTransparent
                         ? "text-white/90 hover:text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
                         : "text-slate-800 hover:text-[#0081c6]"
@@ -277,8 +381,8 @@ export function Navbar() {
                   >
                     SERVICES
                     <ChevronDown
-                      className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                        isServicesOpen ? "rotate-180" : ""
+                      className={`w-3.5 h-3.5 transition-transform duration-300 ${
+                        isServicesOpen ? "rotate-180 text-[#0081c6]" : ""
                       } ${
                         isTransparent
                           ? "text-white/80 group-hover:text-white"
@@ -291,49 +395,6 @@ export function Navbar() {
                       } ${isServicesOpen ? "w-full" : "w-0 group-hover:w-full"}`}
                     />
                   </button>
-
-                  {/* Services Mega Dropdown Menu */}
-                  {isServicesOpen && (
-                    <div
-                      className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-[620px] bg-white rounded-lg shadow-2xl border border-slate-100 p-5 grid grid-cols-2 gap-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150"
-                      role="menu"
-                    >
-                      {SERVICES.map((service) => {
-                        const IconComponent = service.icon
-                        return (
-                          <Link
-                            key={service.title}
-                            href={service.href}
-                            role="menuitem"
-                            onClick={() => setIsServicesOpen(false)}
-                            className="flex items-start gap-3 p-2.5 rounded-md hover:bg-slate-50 transition-colors group/item"
-                          >
-                            <div className="w-8 h-8 rounded bg-sky-50 text-[#0081c6] flex items-center justify-center flex-shrink-0 group-hover/item:bg-[#0081c6] group-hover/item:text-white transition-colors">
-                              <IconComponent className="w-4 h-4" />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="text-[13px] font-semibold text-slate-900 group-hover/item:text-[#0081c6] transition-colors">
-                                {service.title}
-                              </div>
-                              <p className="text-[11px] text-slate-500 line-clamp-1 mt-0.5">
-                                {service.description}
-                              </p>
-                            </div>
-                          </Link>
-                        )
-                      })}
-                      <div className="col-span-2 mt-2 pt-3 border-t border-slate-100 flex items-center justify-between text-xs px-1">
-                        <span className="text-slate-400">Alfa Gulf Engineering & Contracting</span>
-                        <Link
-                          href="/services"
-                          onClick={() => setIsServicesOpen(false)}
-                          className="font-medium text-[#0081c6] hover:underline flex items-center gap-1"
-                        >
-                          View all services <ArrowRight className="w-3 h-3" />
-                        </Link>
-                      </div>
-                    </div>
-                  )}
                 </div>
 
                 <Link
@@ -461,6 +522,54 @@ export function Navbar() {
                   <Menu className="w-6 h-6" />
                 )}
               </button>
+            </div>
+          </div>
+        </div>
+
+        {/* FULL-WIDTH DESKTOP MEGA DROPDOWN DRAWER (Clean Executive Light Ice-Blue List - No Boxes) */}
+        <div
+          className={`hidden lg:grid w-full bg-[#eaf4fd]/98 backdrop-blur-xl shadow-[0_25px_60px_rgba(0,129,198,0.12)] transition-all duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] origin-top overflow-hidden ${
+            isServicesOpen
+              ? "grid-rows-[1fr] opacity-100 py-6 border-t border-b border-[#0081c6]/20"
+              : "grid-rows-[0fr] opacity-0 py-0 border-t-0 border-b-0 pointer-events-none"
+          }`}
+          onMouseEnter={handleMouseEnterServices}
+          onMouseLeave={handleMouseLeaveServices}
+        >
+          <div className="overflow-hidden min-h-0">
+            <div className="max-w-[1120px] mx-auto px-6">
+              {/* 2-Column Grid of Clean Service List Items (No Boxes) */}
+              <div className="grid grid-cols-2 gap-x-8 gap-y-2">
+                {SERVICES.map((service) => {
+                  const IconComp = service.icon
+                  return (
+                    <Link
+                      key={service.title}
+                      href={service.href}
+                      onClick={() => setIsServicesOpen(false)}
+                      className="flex items-center gap-3.5 p-3 rounded-xl hover:bg-[#0081c6]/12 transition-all duration-200 group"
+                    >
+                      {/* Icon */}
+                      <div className="w-9 h-9 rounded-lg bg-[#0081c6]/10 text-[#0081c6] group-hover:bg-[#0081c6] group-hover:text-white transition-colors duration-200 flex items-center justify-center shrink-0">
+                        <IconComp className="w-4 h-4" />
+                      </div>
+
+                      {/* Title & Short snippet */}
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-[14px] font-bold text-slate-800 group-hover:text-[#0081c6] transition-colors leading-snug">
+                          {service.title}
+                        </h4>
+                        <p className="text-[11.5px] text-slate-500 group-hover:text-slate-700 line-clamp-1 mt-0.5 font-normal">
+                          {service.description}
+                        </p>
+                      </div>
+
+                      {/* Chevron Right */}
+                      <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-[#0081c6] transition-all group-hover:translate-x-1 shrink-0" />
+                    </Link>
+                  )
+                })}
+              </div>
             </div>
           </div>
         </div>
@@ -684,10 +793,10 @@ export function Navbar() {
             aria-modal="true"
           >
             {/* Header */}
-            <div className="bg-[#1f242e] text-white p-6 relative">
+            <div className="bg-gradient-to-r from-[#e3f2fd] via-[#eaf5fe] to-[#f0f8ff] text-slate-800 border-b border-[#0081c6]/20 p-6 relative">
               <div className="flex items-center gap-2.5 mb-1.5">
                 <span
-                  className="grid grid-cols-2 gap-[2.5px] w-3.5 h-3.5 text-sky-400"
+                  className="grid grid-cols-2 gap-[2.5px] w-3.5 h-3.5 text-[#0081c6]"
                   aria-hidden="true"
                 >
                   <span className="w-1.5 h-1.5 rounded-[0.5px] bg-current" />
@@ -695,18 +804,18 @@ export function Navbar() {
                   <span className="w-1.5 h-1.5 rounded-[0.5px] bg-current" />
                   <span className="w-1.5 h-1.5 rounded-[0.5px] bg-current" />
                 </span>
-                <span className="text-xs uppercase tracking-widest text-sky-400 font-bold">
+                <span className="text-xs uppercase tracking-widest text-[#0081c6] font-bold">
                   Alfa Gulf Direct Contact
                 </span>
               </div>
-              <h3 className="text-xl font-bold">Get In Touch With Us</h3>
-              <p className="text-slate-300 text-xs mt-1">
+              <h3 className="text-xl font-bold text-slate-900">Get In Touch With Us</h3>
+              <p className="text-slate-600 text-xs mt-1">
                 Have a project or construction inquiry? Speak directly with our team.
               </p>
               <button
                 type="button"
                 onClick={() => setIsContactOpen(false)}
-                className="absolute top-5 right-5 p-1 rounded-md text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+                className="absolute top-5 right-5 p-1 rounded-md text-slate-400 hover:text-slate-700 hover:bg-[#0081c6]/10 transition-colors"
                 aria-label="Close dialog"
               >
                 <X className="w-5 h-5" />
@@ -822,6 +931,7 @@ export function Navbar() {
           </div>
         </div>
       )}
+
     </>
   )
 }

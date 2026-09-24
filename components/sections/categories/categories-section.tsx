@@ -19,7 +19,7 @@ const CATEGORIES = [
     description:
       "Turnkey commercial complexes, industrial plants, and certified structural steel erection engineered to Saudi Building Code standards.",
     image: "/categories/construction.jpg",
-    href: "/services/commercial-buildings",
+    href: "/services/commercial-projects",
   },
   {
     number: "02",
@@ -28,7 +28,7 @@ const CATEGORIES = [
     description:
       "Mission-critical tier datacenters, intelligent BMS automation, high-speed fiber networks, and integrated enterprise security ecosystems.",
     image: "/categories/it-technology.jpg",
-    href: "/services/it-cctv-services",
+    href: "/services/cctv-it-sales",
   },
   {
     number: "03",
@@ -37,7 +37,7 @@ const CATEGORIES = [
     description:
       "Specialized heavy equipment haulage, oversized structural transit, and agile supply chain logistics supporting jobsites across Saudi Arabia.",
     image: "/categories/transportation.jpg",
-    href: "/services/material-supply",
+    href: "/services/building-materials",
   },
 ]
 
