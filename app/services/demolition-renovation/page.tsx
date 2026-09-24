@@ -205,7 +205,7 @@ export default function DemolitionRenovationPage() {
         {/* Architectural background overlay */}
         <div className="absolute inset-0 z-0 right-0 w-full md:w-[70%] ml-auto">
           <Image
-            src="/services/commercial_projects.jpg"
+            src="/services/structural_demolition.jpg"
             alt="Abstract Architecture"
             fill
             className="object-cover object-right opacity-60 grayscale mix-blend-screen"

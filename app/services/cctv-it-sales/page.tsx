@@ -11,7 +11,7 @@ export default function CctvItSalesPage() {
         {/* Background Image with Clean Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop"
+            src="/services/cctv_it_services.jpg"
             alt="CCTV & IT Sales and Services Alfa Gulf"
             fill
             priority
@@ -271,7 +271,7 @@ export default function CctvItSalesPage() {
         {/* Architectural background overlay */}
         <div className="absolute inset-0 z-0 right-0 w-full md:w-[70%] ml-auto">
           <Image
-            src="https://images.unsplash.com/photo-1423683249427-8ca22bd873e0?q=80&w=2070&auto=format&fit=crop"
+            src="/services/cctv_it_services.jpg"
             alt="Abstract Architecture"
             fill
             className="object-cover object-right opacity-60 grayscale mix-blend-screen"

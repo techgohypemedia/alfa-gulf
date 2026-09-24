@@ -52,7 +52,9 @@ export default function CommercialProjectsPage() {
               <Link href="/contact" className="inline-flex items-center gap-2 text-[#0081c6] font-semibold uppercase tracking-wider text-sm hover:gap-4 transition-all duration-300">
                 Discuss Your Project <ArrowRight className="w-4 h-4" />
               </Link>
-                      <div className="lg:w-[55%] w-full relative aspect-[4/3] rounded-2xl overflow-hidden group shadow-2xl shadow-slate-200">
+            </div>
+          </div>
+          <div className="lg:w-[55%] w-full relative aspect-[4/3] rounded-2xl overflow-hidden group shadow-2xl shadow-slate-200">
              <Image 
               src="/services/fitout_works.jpg" 
               alt="Modern building interior" 
@@ -147,7 +149,6 @@ export default function CommercialProjectsPage() {
             alt="Abstract Architecture" 
             fill 
             className="object-cover object-right opacity-60 grayscale mix-blend-screen"
-          />-right opacity-60 grayscale mix-blend-screen"
           />
           {/* Gradient to fade image into solid black on the left */}
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent" />

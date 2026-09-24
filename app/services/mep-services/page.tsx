@@ -6,14 +6,35 @@ export default function MepServicesPage() {
   return (
     <div className="bg-white text-slate-900 min-h-screen">
       
-      {/* ── HEADER SECTION ── */}
-      <section className="relative w-full pt-32 pb-16 lg:pt-48 lg:pb-20 max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight text-slate-900 leading-[1.1] md:w-1/2">
-          MEP Services
-        </h1>
-        <p className="text-lg text-slate-600 md:w-1/2 font-light leading-relaxed max-w-2xl">
-          Delivering high-quality mechanical, electrical, and plumbing solutions for seamless project execution.
-        </p>
+      {/* ── MASSIVE HERO BANNER SECTION ── */}
+      <section className="relative w-full h-[85vh] min-h-[600px] flex items-center overflow-hidden border-b border-slate-200 shadow-2xl">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image 
+            src="/services/mep_services.jpg" 
+            alt="MEP Services Banner" 
+            fill 
+            priority
+            sizes="100vw"
+            className="object-cover scale-105 hover:scale-100 transition-transform duration-[3000ms]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+        </div>
+
+        {/* Text Content */}
+        <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 flex flex-col md:w-2/3 lg:w-1/2 gap-6 mt-20">
+          <div className="inline-flex items-center gap-3">
+            <span className="w-8 h-[2px] bg-[#0081c6]"></span>
+            <span className="text-[#0081c6] font-bold tracking-[0.2em] uppercase text-sm">Engineering Excellence</span>
+          </div>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight text-white leading-[1.1]">
+            MEP Services
+          </h1>
+          <p className="text-lg text-slate-300 font-light leading-relaxed max-w-xl">
+            Delivering high-quality mechanical, electrical, and plumbing solutions for seamless project execution across Saudi Arabia.
+          </p>
+        </div>
       </section>
 
       {/* ── SPLIT SECTION: ADVANTAGES FOR PROJECT OWNERS ── */}
@@ -32,7 +53,7 @@ export default function MepServicesPage() {
           </div>
           <div className="lg:w-1/2 w-full h-[600px] relative rounded-3xl overflow-hidden shadow-2xl">
             <Image 
-              src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2071&auto=format&fit=crop" 
+              src="/services/mep_services.jpg" 
               alt="Engineers reviewing MEP plans" 
               fill 
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -46,7 +67,7 @@ export default function MepServicesPage() {
       <section className="w-full mb-24 lg:mb-32">
         <div className="relative w-full h-[60vh] md:h-[80vh] overflow-hidden shadow-2xl border-y border-slate-200">
           <Image 
-            src="https://images.unsplash.com/photo-1616423640778-28d1b53229bd?q=80&w=2070&auto=format&fit=crop" 
+            src="/services/chilled_water_plant.jpg" 
             alt="Massive HVAC Pipes" 
             fill 
             sizes="100vw"
@@ -59,7 +80,7 @@ export default function MepServicesPage() {
       <section className="relative w-full bg-black border-b-[6px] border-[#ff5e00] overflow-hidden">
         <div className="absolute inset-0 z-0 right-0 w-full md:w-[70%] ml-auto">
           <Image 
-            src="https://images.unsplash.com/photo-1423683249427-8ca22bd873e0?q=80&w=2070&auto=format&fit=crop" 
+            src="/services/mep_services.jpg" 
             alt="Abstract Architecture" 
             fill 
             className="object-cover object-right opacity-60 grayscale mix-blend-screen"

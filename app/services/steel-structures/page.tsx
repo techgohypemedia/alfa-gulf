@@ -79,7 +79,7 @@ export default function SteelStructuresPage() {
           <div className="md:col-span-8 group relative rounded-2xl overflow-hidden bg-white shadow-xl shadow-slate-200/50 min-h-[400px] flex flex-col justify-end p-10 lg:p-12">
             <div className="absolute inset-0 z-0">
               <Image 
-                src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2071&auto=format&fit=crop" 
+                src="/services/steel_structures.jpg" 
                 alt="Steel Framework" 
                 fill 
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -99,7 +99,7 @@ export default function SteelStructuresPage() {
           <div className="md:col-span-4 group relative rounded-2xl overflow-hidden bg-slate-900 shadow-xl min-h-[400px] flex flex-col justify-end p-10">
             <div className="absolute inset-0 z-0 opacity-40 mix-blend-luminosity group-hover:opacity-60 transition-opacity duration-700">
               <Image 
-                src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2070&auto=format&fit=crop" 
+                src="/services/steel_rebar_supply.jpg" 
                 alt="Coating Application" 
                 fill 
                 className="object-cover"
@@ -163,7 +163,7 @@ export default function SteelStructuresPage() {
       <section className="relative w-full bg-black border-b-[6px] border-[#ff5e00] overflow-hidden">
         <div className="absolute inset-0 z-0 right-0 w-full md:w-[70%] ml-auto">
           <Image 
-            src="https://images.unsplash.com/photo-1423683249427-8ca22bd873e0?q=80&w=2070&auto=format&fit=crop" 
+            src="/services/steel_structures.jpg" 
             alt="Abstract Architecture" 
             fill 
             className="object-cover object-right opacity-60 grayscale mix-blend-screen"

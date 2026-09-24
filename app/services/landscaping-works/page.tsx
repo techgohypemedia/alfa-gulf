@@ -11,7 +11,7 @@ export default function LandscapingWorksPage() {
         {/* Background Image with Clean Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://images.unsplash.com/photo-1558904541-efa843a96f01?q=80&w=2070&auto=format&fit=crop"
+            src="/services/landscaping_works.jpg"
             alt="Landscaping Works Alfa Gulf"
             fill
             priority
@@ -271,7 +271,7 @@ export default function LandscapingWorksPage() {
         {/* Architectural background overlay */}
         <div className="absolute inset-0 z-0 right-0 w-full md:w-[70%] ml-auto">
           <Image
-            src="https://images.unsplash.com/photo-1423683249427-8ca22bd873e0?q=80&w=2070&auto=format&fit=crop"
+            src="/services/landscaping_works.jpg"
             alt="Abstract Architecture"
             fill
             className="object-cover object-right opacity-60 grayscale mix-blend-screen"

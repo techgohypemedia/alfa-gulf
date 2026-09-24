@@ -11,7 +11,7 @@ export default function ResidentialVillasPage() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image 
-            src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2070&auto=format&fit=crop" 
+            src="/services/residential_villas.jpg" 
             alt="Modern residential building facade" 
             fill 
             priority
@@ -43,7 +43,7 @@ export default function ResidentialVillasPage() {
         <div className="flex flex-col-reverse lg:flex-row items-center gap-16 lg:gap-24">
           <div className="lg:w-1/2 w-full h-[600px] relative rounded-3xl overflow-hidden shadow-2xl">
             <Image 
-              src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop" 
+              src="/services/fitout_works.jpg" 
               alt="Modern geometric villas" 
               fill 
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -77,7 +77,7 @@ export default function ResidentialVillasPage() {
           </div>
           <div className="lg:w-1/2 w-full h-[500px] relative rounded-3xl overflow-hidden shadow-2xl">
             <Image 
-              src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop" 
+              src="/services/residential_villas.jpg" 
               alt="Modern integrated residential construction" 
               fill 
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -117,7 +117,7 @@ export default function ResidentialVillasPage() {
       <section className="relative w-full bg-black border-b-[6px] border-[#ff5e00] overflow-hidden">
         <div className="absolute inset-0 z-0 right-0 w-full md:w-[70%] ml-auto">
           <Image 
-            src="https://images.unsplash.com/photo-1423683249427-8ca22bd873e0?q=80&w=2070&auto=format&fit=crop" 
+            src="/services/residential_villas.jpg" 
             alt="Abstract Architecture" 
             fill 
             className="object-cover object-right opacity-60 grayscale mix-blend-screen"

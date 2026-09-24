@@ -20,7 +20,7 @@ export default function FitOutWorksPage() {
       <section className="w-full mb-24 lg:mb-32">
         <div className="relative w-full h-[60vh] md:h-[75vh] overflow-hidden shadow-2xl border-y border-slate-200">
           <Image 
-            src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop" 
+            src="/services/fitout_works.jpg" 
             alt="Modern Interior Fit-Out" 
             fill 
             priority
@@ -65,7 +65,7 @@ export default function FitOutWorksPage() {
           <div className="lg:w-1/2 w-full">
             <div className="relative w-full aspect-square md:aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
               <Image 
-                src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2071&auto=format&fit=crop" 
+                src="/services/fitout_works.jpg" 
                 alt="Architect working on target value design blueprints" 
                 fill 
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -82,7 +82,7 @@ export default function FitOutWorksPage() {
       <section className="relative w-full bg-black border-b-[6px] border-[#ff5e00] overflow-hidden">
         <div className="absolute inset-0 z-0 right-0 w-full md:w-[70%] ml-auto">
           <Image 
-            src="https://images.unsplash.com/photo-1423683249427-8ca22bd873e0?q=80&w=2070&auto=format&fit=crop" 
+            src="/services/fitout_works.jpg" 
             alt="Abstract Architecture" 
             fill 
             className="object-cover object-right opacity-60 grayscale mix-blend-screen"

@@ -118,7 +118,7 @@ export default function BuildingMaterialsPage() {
             <div className="bg-white border border-slate-200 shadow-sm p-8 lg:p-10 space-y-6 hover:border-[#0081c6]/40 transition-colors duration-300">
               <div className="relative aspect-[16/9] overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=2070&auto=format&fit=crop"
+                  src="/services/building_materials.jpg"
                   alt="Ready-Mix Concrete & Aggregates"
                   fill
                   className="object-cover"
@@ -234,7 +234,7 @@ export default function BuildingMaterialsPage() {
         {/* Architectural background overlay */}
         <div className="absolute inset-0 z-0 right-0 w-full md:w-[70%] ml-auto">
           <Image
-            src="https://images.unsplash.com/photo-1423683249427-8ca22bd873e0?q=80&w=2070&auto=format&fit=crop"
+            src="/services/steel_rebar_supply.jpg"
             alt="Abstract Architecture"
             fill
             className="object-cover object-right opacity-60 grayscale mix-blend-screen"

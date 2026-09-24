@@ -132,7 +132,7 @@ export default function HvacDivisionPage() {
             </div>
             <div className="lg:w-[55%] w-full relative aspect-[4/3] overflow-hidden group shadow-2xl shadow-slate-200">
               <Image
-                src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=2069&auto=format&fit=crop"
+                src="/services/chilled_water_plant.jpg"
                 alt="VRF / VRV Smart Climate Control Systems"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -144,7 +144,7 @@ export default function HvacDivisionPage() {
           <section className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
             <div className="lg:w-[55%] w-full relative aspect-[4/3] overflow-hidden group shadow-2xl shadow-slate-200 order-2 lg:order-1">
               <Image
-                src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop"
+                src="/services/hvac_division.jpg"
                 alt="GI & PI Ductwork Fabrication & Industrial Exhaust"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -205,7 +205,7 @@ export default function HvacDivisionPage() {
         {/* Architectural background overlay */}
         <div className="absolute inset-0 z-0 right-0 w-full md:w-[70%] ml-auto">
           <Image
-            src="https://images.unsplash.com/photo-1423683249427-8ca22bd873e0?q=80&w=2070&auto=format&fit=crop"
+            src="/services/hvac_division.jpg"
             alt="Abstract Architecture"
             fill
             className="object-cover object-right opacity-60 grayscale mix-blend-screen"
