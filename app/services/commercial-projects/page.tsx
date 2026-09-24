@@ -12,7 +12,7 @@ export default function CommercialProjectsPage() {
         {/* Background Image with Premium Overlay */}
         <div className="absolute inset-0 z-0">
           <Image 
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" 
+            src="/services/commercial_projects.jpg" 
             alt="Commercial Project Render" 
             fill 
             priority
@@ -52,11 +52,9 @@ export default function CommercialProjectsPage() {
               <Link href="/contact" className="inline-flex items-center gap-2 text-[#0081c6] font-semibold uppercase tracking-wider text-sm hover:gap-4 transition-all duration-300">
                 Discuss Your Project <ArrowRight className="w-4 h-4" />
               </Link>
-            </div>
-          </div>
-          <div className="lg:w-[55%] w-full relative aspect-[4/3] rounded-2xl overflow-hidden group shadow-2xl shadow-slate-200">
+                      <div className="lg:w-[55%] w-full relative aspect-[4/3] rounded-2xl overflow-hidden group shadow-2xl shadow-slate-200">
              <Image 
-              src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop" 
+              src="/services/fitout_works.jpg" 
               alt="Modern building interior" 
               fill 
               className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -83,7 +81,7 @@ export default function CommercialProjectsPage() {
         <section className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
           <div className="lg:w-[55%] w-full relative aspect-[3/4] md:aspect-[4/3] rounded-2xl overflow-hidden group shadow-2xl shadow-slate-200 order-2 lg:order-1">
              <Image 
-              src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2070&auto=format&fit=crop" 
+              src="/services/building_materials.jpg" 
               alt="Glass building facade" 
               fill 
               className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -145,10 +143,11 @@ export default function CommercialProjectsPage() {
         {/* Architectural background overlay */}
         <div className="absolute inset-0 z-0 right-0 w-full md:w-[70%] ml-auto">
           <Image 
-            src="https://images.unsplash.com/photo-1423683249427-8ca22bd873e0?q=80&w=2070&auto=format&fit=crop" 
+            src="/services/commercial_projects.jpg" 
             alt="Abstract Architecture" 
             fill 
             className="object-cover object-right opacity-60 grayscale mix-blend-screen"
+          />-right opacity-60 grayscale mix-blend-screen"
           />
           {/* Gradient to fade image into solid black on the left */}
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent" />
