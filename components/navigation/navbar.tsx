@@ -35,7 +35,7 @@ const SERVICES = [
     title: "Commercial Projects",
     category: "CONSTRUCTION",
     href: "/services/commercial-projects",
-    description: "Office towers, commercial hubs & corporate...",
+    description: "Office towers, commercial hubs & corporate complexes",
     detailText: "We deliver modern commercial spaces, office towers and business hubs designed for growth, functionality and long-term value.",
     checklist: [
       "Civil Construction",
@@ -51,7 +51,7 @@ const SERVICES = [
     title: "Residential Complex & Villas",
     category: "RESIDENTIAL",
     href: "/services/residential-buildings-villas",
-    description: "Luxury villas, residential compounds & high-end...",
+    description: "Luxury villas, residential compounds & high-end living",
     detailText: "High-end residential compounds, modern apartment complexes, and luxury villa developments built to international structural and architectural standards.",
     checklist: [
       "Turnkey Villa Construction",
@@ -67,7 +67,7 @@ const SERVICES = [
     title: "MEP Services",
     category: "ENGINEERING",
     href: "/services/mep-services",
-    description: "Mechanical, electrical, plumbing & low-current...",
+    description: "Mechanical, electrical, plumbing & low-current engineering",
     detailText: "Complete mechanical, electrical, plumbing, and low-current systems engineering designed for high efficiency, safety, and modern building standards.",
     checklist: [
       "HVAC & Piping Systems",
@@ -83,7 +83,7 @@ const SERVICES = [
     title: "Steel Structure & Fire Proofing",
     category: "INDUSTRIAL",
     href: "/services/steel-structures",
-    description: "Certified intumescent coating & industrial structural...",
+    description: "Certified intumescent coating & industrial structural steel",
     detailText: "Industrial structural steel fabrication, erection, and UL-certified intumescent fireproofing solutions for commercial and heavy industrial assets.",
     checklist: [
       "Structural Steel Erection",
@@ -99,7 +99,7 @@ const SERVICES = [
     title: "Fit-Out Works",
     category: "INTERIORS",
     href: "/services/fitout-works",
-    description: "Premium interior fit-out, finishes, and turnkey delivery",
+    description: "Premium interior fit-out, finishes & turnkey delivery",
     detailText: "Bespoke corporate fit-outs, luxury retail interiors, acoustic ceilings, and high-end architectural wall cladding crafted with precision execution.",
     checklist: [
       "Corporate Office Fit-Out",
@@ -115,7 +115,7 @@ const SERVICES = [
     title: "IT & CCTV Services",
     category: "SECURITY & TECH",
     href: "/services/cctv-it-sales",
-    description: "Security surveillance, networking, and smart building...",
+    description: "Security surveillance, networking & smart building tech",
     detailText: "Enterprise AI-powered CCTV surveillance, biometric access control, optical fiber networking, and server room infrastructure solutions.",
     checklist: [
       "AI CCTV Surveillance",
@@ -131,7 +131,7 @@ const SERVICES = [
     title: "Landscaping Works",
     category: "ENVIRONMENTAL",
     href: "/services/landscaping-works",
-    description: "Hardscaping, irrigation systems, and architectural...",
+    description: "Hardscaping, smart irrigation & architectural landscape",
     detailText: "Architectural softscaping, custom stone hardscaping, smart automated irrigation systems, and exterior landscape illumination.",
     checklist: [
       "Architectural Softscaping",
@@ -147,7 +147,7 @@ const SERVICES = [
     title: "Building Material Supplies",
     category: "SUPPLY CHAIN",
     href: "/services/building-materials",
-    description: "Direct procurement of certified construction materials",
+    description: "Direct procurement of certified structural materials",
     detailText: "Certified deformed steel rebar, ready-mix concrete, thermal insulation, and high-tensile structural building materials supplied directly to major projects.",
     checklist: [
       "Deformed Steel Rebar",
@@ -163,7 +163,7 @@ const SERVICES = [
     title: "HVAC Systems",
     category: "CLIMATE CONTROL",
     href: "/services/hvac-division",
-    description: "Engineered ventilation, cooling plants, and ducting...",
+    description: "Engineered ventilation, cooling plants & industrial ducting",
     detailText: "Heavy industrial chilled water plants, ducted split units, VRF systems, and clean-room ventilation engineered for extreme desert conditions.",
     checklist: [
       "Chilled Water Central Plants",
@@ -256,6 +256,17 @@ export function Navbar() {
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [])
 
+  // Close services dropdown on outside click
+  React.useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+        setIsServicesOpen(false)
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => document.removeEventListener("mousedown", handleClickOutside)
+  }, [])
+
   const handleMouseEnterServices = () => {
     if (dropdownTimerRef.current) clearTimeout(dropdownTimerRef.current)
     setIsServicesOpen(true)
@@ -290,7 +301,9 @@ export function Navbar() {
         ref={headerRef}
         className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
           isTransparent
-            ? "bg-gradient-to-b from-black/60 via-black/25 to-transparent border-b border-transparent shadow-none"
+            ? isServicesOpen
+              ? "bg-black/20 backdrop-blur-sm border-b border-white/10"
+              : "bg-gradient-to-b from-black/60 via-black/25 to-transparent border-b border-transparent shadow-none"
             : "bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm"
         }`}
       >
@@ -375,24 +388,34 @@ export function Navbar() {
                     aria-expanded={isServicesOpen}
                     className={`flex items-center gap-1 text-[13px] font-bold tracking-[0.08em] uppercase transition-colors relative group focus:outline-none ${
                       isTransparent
-                        ? "text-white/90 hover:text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+                        ? isServicesOpen
+                          ? "text-white"
+                          : "text-white/90 hover:text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+                        : isServicesOpen
+                        ? "text-[#0081c6]"
                         : "text-slate-800 hover:text-[#0081c6]"
                     }`}
                   >
                     SERVICES
                     <ChevronDown
                       className={`w-3.5 h-3.5 transition-transform duration-300 ${
-                        isServicesOpen ? "rotate-180 text-[#0081c6]" : ""
-                      } ${
-                        isTransparent
+                        isServicesOpen
+                          ? "rotate-180 " + (isTransparent ? "text-sky-400" : "text-[#0081c6]")
+                          : isTransparent
                           ? "text-white/80 group-hover:text-white"
                           : "text-slate-500 group-hover:text-[#0081c6]"
                       }`}
                     />
                     <span
                       className={`absolute bottom-0 left-0 h-[2px] transition-all duration-200 ${
-                        isTransparent ? "bg-white" : "bg-[#0081c6]"
-                      } ${isServicesOpen ? "w-full" : "w-0 group-hover:w-full"}`}
+                        isTransparent
+                          ? isServicesOpen
+                            ? "bg-sky-400 w-full"
+                            : "bg-white w-0 group-hover:w-full"
+                          : isServicesOpen
+                          ? "bg-[#0081c6] w-full"
+                          : "bg-[#0081c6] w-0 group-hover:w-full"
+                      }`}
                     />
                   </button>
                 </div>
@@ -526,12 +549,18 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* FULL-WIDTH DESKTOP MEGA DROPDOWN DRAWER (Clean Executive Light Ice-Blue List - No Boxes) */}
+        {/* FULL-WIDTH DESKTOP MEGA DROPDOWN DRAWER */}
         <div
-          className={`hidden lg:grid w-full bg-[#eaf4fd]/98 backdrop-blur-xl shadow-[0_25px_60px_rgba(0,129,198,0.12)] transition-all duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] origin-top overflow-hidden ${
+          className={`hidden lg:grid w-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] origin-top overflow-hidden ${
+            isTransparent
+              ? "bg-transparent border-b-0 shadow-none"
+              : "bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xl"
+          } ${
             isServicesOpen
-              ? "grid-rows-[1fr] opacity-100 py-6 border-t border-b border-[#0081c6]/20"
+              ? "grid-rows-[1fr] opacity-100 py-6 border-t"
               : "grid-rows-[0fr] opacity-0 py-0 border-t-0 border-b-0 pointer-events-none"
+          } ${
+            isTransparent ? "border-t-white/10" : "border-t-slate-200/80"
           }`}
           onMouseEnter={handleMouseEnterServices}
           onMouseLeave={handleMouseLeaveServices}
@@ -547,25 +576,64 @@ export function Navbar() {
                       key={service.title}
                       href={service.href}
                       onClick={() => setIsServicesOpen(false)}
-                      className="flex items-center gap-3.5 p-3 rounded-xl hover:bg-[#0081c6]/12 transition-all duration-200 group"
+                      className={`flex items-center gap-3.5 p-3 rounded-xl transition-all duration-200 group ${
+                        isTransparent
+                          ? "hover:bg-white/10"
+                          : "hover:bg-slate-50"
+                      }`}
                     >
                       {/* Icon */}
-                      <div className="w-9 h-9 rounded-lg bg-[#0081c6]/10 text-[#0081c6] group-hover:bg-[#0081c6] group-hover:text-white transition-colors duration-200 flex items-center justify-center shrink-0">
+                      <div
+                        className={`w-9 h-9 rounded-lg transition-colors duration-200 flex items-center justify-center shrink-0 ${
+                          isTransparent
+                            ? "bg-[#0081c6]/25 text-sky-400 group-hover:bg-[#0081c6] group-hover:text-white"
+                            : "bg-sky-50 text-[#0081c6] group-hover:bg-[#0081c6] group-hover:text-white"
+                        }`}
+                      >
                         <IconComp className="w-4 h-4" />
                       </div>
 
                       {/* Title & Short snippet */}
                       <div className="flex-1 min-w-0">
-                        <h4 className="text-[14px] font-bold text-slate-800 group-hover:text-[#0081c6] transition-colors leading-snug">
-                          {service.title}
-                        </h4>
-                        <p className="text-[11.5px] text-slate-500 group-hover:text-slate-700 line-clamp-1 mt-0.5 font-normal">
+                        <div className="flex items-center gap-2">
+                          <span
+                            className={`text-[11px] font-mono font-bold tracking-wider shrink-0 ${
+                              isTransparent
+                                ? "text-sky-400 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
+                                : "text-[#0081c6]"
+                            }`}
+                          >
+                            {service.num}
+                          </span>
+                          <h4
+                            className={`text-[14px] font-semibold tracking-tight transition-colors leading-snug ${
+                              isTransparent
+                                ? "text-white group-hover:text-sky-300 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
+                                : "text-slate-900 group-hover:text-[#0081c6]"
+                            }`}
+                          >
+                            {service.title}
+                          </h4>
+                        </div>
+                        <p
+                          className={`text-[12px] line-clamp-1 mt-0.5 font-normal transition-colors ${
+                            isTransparent
+                              ? "text-slate-200/90 group-hover:text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
+                              : "text-slate-500 group-hover:text-slate-700"
+                          }`}
+                        >
                           {service.description}
                         </p>
                       </div>
 
                       {/* Chevron Right */}
-                      <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-[#0081c6] transition-all group-hover:translate-x-1 shrink-0" />
+                      <ChevronRight
+                        className={`w-4 h-4 transition-all group-hover:translate-x-1 shrink-0 ${
+                          isTransparent
+                            ? "text-white/40 group-hover:text-sky-300"
+                            : "text-slate-400 group-hover:text-[#0081c6]"
+                        }`}
+                      />
                     </Link>
                   )
                 })}
@@ -609,20 +677,26 @@ export function Navbar() {
                   />
                 </button>
                 {isMobileServicesOpen && (
-                  <div className="pl-4 pr-2 py-2 space-y-1 bg-slate-50/70 rounded-md mt-1">
-                    {SERVICES.map((s) => (
-                      <Link
-                        key={s.title}
-                        href={s.href}
-                        onClick={() => {
-                          setIsMobileMenuOpen(false)
-                          setIsMobileServicesOpen(false)
-                        }}
-                        className="block px-2.5 py-1.5 text-xs font-medium text-slate-700 hover:text-[#0081c6] transition-colors"
-                      >
-                        {s.title}
-                      </Link>
-                    ))}
+                  <div className="pl-2 pr-2 py-2 space-y-1 bg-slate-50/80 rounded-xl mt-1.5 border border-slate-100">
+                    {SERVICES.map((s) => {
+                      const MobileIcon = s.icon
+                      return (
+                        <Link
+                          key={s.title}
+                          href={s.href}
+                          onClick={() => {
+                            setIsMobileMenuOpen(false)
+                            setIsMobileServicesOpen(false)
+                          }}
+                          className="flex items-center gap-2.5 px-3 py-2 text-xs font-semibold text-slate-700 hover:text-[#0081c6] hover:bg-[#0081c6]/10 rounded-lg transition-colors group"
+                        >
+                          <div className="w-6 h-6 rounded-md bg-[#0081c6]/10 text-[#0081c6] flex items-center justify-center shrink-0 group-hover:bg-[#0081c6] group-hover:text-white transition-colors">
+                            <MobileIcon className="w-3.5 h-3.5" />
+                          </div>
+                          <span>{s.title}</span>
+                        </Link>
+                      )
+                    })}
                   </div>
                 )}
               </div>
